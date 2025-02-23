@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="140dp"
+        android:id="@+id/imgViewBookLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/book_logo"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtBookName"
+        android:layout_below="@id/imgViewBookLogo"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:hint="@string/book_name"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtBookPrice"
+        android:layout_below="@id/edtBookName"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:hint="@string/book_price"
+        android:inputType="number"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerBookCategory"
+        android:layout_below="@id/edtBookPrice"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="40dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnBookSubmit"
+        android:text="@string/calculate_price"
+        android:layout_below="@id/spinnerBookCategory"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        />
+
+</RelativeLayout>

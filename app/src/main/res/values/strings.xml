@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AndroidClub25Sun11</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="signup">Signup</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="firstname">FirstName</string>
+    <string name="product_name">Product Name</string>
+    <string name="price">Price</string>
+    <string name="qty">Qty</string>
+    <string name="cal_price">Calculate Price</string>
+    <string name="book_name">Book Name</string>
+    <string name="book_price">Book Price</string>
+    <string name="calculate_price">Calculate Price</string>
+</resources>

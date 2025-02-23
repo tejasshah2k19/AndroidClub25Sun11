@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddProductActivity">
+
+<ImageView
+    android:layout_width="130dp"
+    android:layout_height="130dp"
+    android:id="@+id/imgViewAddProductLogo"
+    android:src="@drawable/add_product"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="80dp"
+    />
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/edtAddProductName"
+    android:layout_below="@id/imgViewAddProductLogo"
+    android:layout_marginTop="100dp"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:hint="@string/product_name"
+    />
+
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/edtAddProductPrice"
+       android:layout_below="@id/edtAddProductName"
+       android:layout_marginTop="20dp"
+       android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:hint="@string/price"
+       android:inputType="number"
+       />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtAddProductQty"
+        android:layout_below="@id/edtAddProductPrice"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:hint="@string/qty"
+        android:inputType="number"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddProductSubmit"
+        android:text="@string/cal_price"
+        android:layout_below="@id/edtAddProductQty"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        />
+</RelativeLayout>
