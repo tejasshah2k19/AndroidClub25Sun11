@@ -19,7 +19,7 @@
             android:layout_width="146dp"
             android:layout_height="match_parent"
             android:id="@+id/imgBtnMovieAdd"
-            android:background="@drawable/baseline_add_box_18"
+            android:background="@drawable/fill_add_box_18"
             />
 
         <ImageButton
@@ -36,5 +36,12 @@
             android:background="@drawable/empty_list"
             />
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="860dp"
+        android:id="@+id/frameMovieMaster"
+        android:layout_below="@id/linearLayoutMovieButton"
+        />
 
 </RelativeLayout>

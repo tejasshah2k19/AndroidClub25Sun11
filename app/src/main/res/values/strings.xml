@@ -16,4 +16,9 @@
     <string name="book_name">Book Name</string>
     <string name="book_price">Book Price</string>
     <string name="calculate_price">Calculate Price</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_name">Movie name</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="search_movie">Search Movie</string>
 </resources>
