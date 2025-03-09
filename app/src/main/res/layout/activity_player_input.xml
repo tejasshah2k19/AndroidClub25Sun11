@@ -8,33 +8,54 @@
     tools:context=".PlayerInputActivity">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/login"
+        android:textSize="20pt"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:fontFamily="cursive"
+        android:layout_marginTop="100dp"
+        />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:id="@+id/edtInputUsername"
+        android:id="@+id/edtInputEmail"
         android:layout_centerVertical="true"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:hint="@string/username"
+        android:hint="@string/email"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:id="@+id/edtInputBet"
+        android:id="@+id/edtInputPassword"
          android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:hint="@string/bet"
-        android:layout_below="@id/edtInputUsername"
+        android:hint="@string/password"
+        android:layout_below="@id/edtInputEmail"
+        android:inputType="textPassword"
         />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnInputPlay"
-            android:layout_below="@id/edtInputBet"
+            android:id="@+id/btnInputLogin"
+            android:layout_below="@id/edtInputPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="@string/play"
+            android:text="@string/login"
             />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tvInputSignup"
+        android:text="@string/new_user"
+        android:layout_below="@id/btnInputLogin"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="10pt"
+        />
 
 </RelativeLayout>

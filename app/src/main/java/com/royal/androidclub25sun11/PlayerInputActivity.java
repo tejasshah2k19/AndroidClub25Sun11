@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class PlayerInputActivity extends AppCompatActivity {
 
-    Button btnPlay;
-    EditText edtUsername;
-    EditText edtBet;
+    Button btnLogin;
+    EditText edtEmail;
+    EditText edtPassword;
+
+    TextView tvNewUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,25 +32,33 @@ public class PlayerInputActivity extends AppCompatActivity {
             return insets;
         });
 
-        btnPlay = findViewById(R.id.btnInputPlay);
-        edtUsername  = findViewById(R.id.edtInputUsername);
-        edtBet = findViewById(R.id.edtInputBet);
+        btnLogin = findViewById(R.id.btnInputLogin);
+        edtEmail  = findViewById(R.id.edtInputEmail);
+        edtPassword = findViewById(R.id.edtInputPassword);
+        tvNewUser = findViewById(R.id.tvInputSignup);
 
-
-        btnPlay.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String userName = edtUsername.getText().toString();
-                String betAmt =  edtBet.getText().toString();
+                String email= edtEmail.getText().toString();
+                String password =  edtPassword.getText().toString();
 
-                Intent intent = new Intent(getApplicationContext(),GameActivity.class);
-                intent.putExtra("userName",userName);
-                intent.putExtra("betAmt",betAmt);
+                //api call ->
+            }
+        });
 
+        tvNewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //animation
+                Intent intent = new Intent(getApplicationContext(),SignupActivity.class);
                 startActivity(intent);
             }
         });
+
+
+
 
     }
 }
