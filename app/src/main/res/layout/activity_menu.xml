@@ -30,4 +30,17 @@
         android:layout_marginTop="20dp"
         />
 
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnMenuExit"
+        android:text="@string/exit"
+        android:textSize="15pt"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btnMenuLeaderboard"
+        android:layout_marginTop="20dp"
+        />
+
+
 </RelativeLayout>

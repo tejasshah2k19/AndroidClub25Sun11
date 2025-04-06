@@ -27,4 +27,5 @@
     <string name="bet">Bet</string>
     <string name="login">Login</string>
     <string name="new_user"><u>New User?</u></string>
+    <string name="exit">Exit</string>
 </resources>
