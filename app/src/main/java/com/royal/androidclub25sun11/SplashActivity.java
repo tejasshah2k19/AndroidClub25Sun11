@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
+                Intent intent = new Intent(getApplicationContext(),PlayerInputActivity.class);
                     startActivity(intent);
 
             }

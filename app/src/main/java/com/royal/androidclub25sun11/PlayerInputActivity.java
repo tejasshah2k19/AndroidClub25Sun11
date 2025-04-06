@@ -2,6 +2,7 @@ package com.royal.androidclub25sun11;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.gson.Gson;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashMap;
 
 public class PlayerInputActivity extends AppCompatActivity {
 
@@ -60,5 +69,46 @@ public class PlayerInputActivity extends AppCompatActivity {
 
 
 
+    }//onCreate
+
+    private void loginApi(String email,String password){
+
+        String apiUrl = "https://diamondgame.onrender.com/api/auth/login";
+
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection =  (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type","application/json");
+            connection.setRequestProperty("Accept","application/json");
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+
+            HashMap<String,String> map = new HashMap<>();
+            map.put("email",email);
+            map.put("password",password);
+
+            Gson gson = new Gson() ;
+            String jsonString  = gson.toJson(map);
+
+            OutputStream out =  connection.getOutputStream();
+            out.write(jsonString.getBytes());
+            out.flush();
+            out.close();
+
+           Integer statusCode = connection.getResponseCode();
+
+           //200 401
+
+
+
+        }catch (Exception e){
+            Log.i("api",e.getMessage());
+        }
+
+
+
+
     }
-}
+
+}//class

@@ -1,5 +1,6 @@
 package com.royal.androidclub25sun11;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -93,12 +94,20 @@ public class SignupActivity extends AppCompatActivity {
                    }
                });
 
-              try {
+
+               // Executors.newCachedThreadPool();
+               // Executors.newFixedThreadPool(5);
+
+                try {
                   Integer statusCode = ft.get();
                   if(statusCode == 201){
                       //signup done
                       //redirect to login page
                       Log.i("API","success");
+
+                      Intent intent = new Intent(getApplicationContext(),PlayerInputActivity.class);
+                      startActivity(intent);
+                      
                   }
                   Log.i("API",statusCode+"");
               }catch (Exception e){
