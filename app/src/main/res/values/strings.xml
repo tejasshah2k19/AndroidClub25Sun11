@@ -28,4 +28,5 @@
     <string name="login">Login</string>
     <string name="new_user"><u>New User?</u></string>
     <string name="exit">Exit</string>
+    <string name="cash_out">Cash Out</string>
 </resources>

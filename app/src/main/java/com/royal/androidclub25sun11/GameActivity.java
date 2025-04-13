@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +16,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.gson.Gson;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -25,8 +40,14 @@ public class GameActivity extends AppCompatActivity {
     HashSet<Integer> bomArray;
     ImageButton imageButton[] = new ImageButton[16];
 
+    Button btnCashOut;
     Integer winningAmt;
     Integer betAmt;
+    String userId;
+    String token;
+    String firstName;
+
+    String apiUrl = "https://diamondgame.onrender.com/api/users/credit/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +72,9 @@ public class GameActivity extends AppCompatActivity {
         winningAmt = 0;
 
         SharedPreferences preferences = getSharedPreferences("diamond_game",MODE_PRIVATE);
-        String firstName = preferences.getString("firstName","USER");
+        firstName  = preferences.getString("firstName","USER");
+        userId = preferences.getString("userId","-1");
+        token = preferences.getString("token","-1");
 
 
         tvUsername.setText(firstName);
@@ -76,6 +99,7 @@ public class GameActivity extends AppCompatActivity {
         imageButton[15] = findViewById(R.id.imgBtn15);
 
         bomArray = new HashSet<>();
+        btnCashOut = findViewById(R.id.btnGamePlayCashOut);
 
         while(bomArray.size() != 4){
             int x = (int)(Math.random()*16);
@@ -89,6 +113,39 @@ public class GameActivity extends AppCompatActivity {
              imageButton[i].setOnClickListener(v->gamePlay(index));
         }
 
+        btnCashOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String winningAmtStr = tvWinningAmt.getText().toString();
+
+
+                ExecutorService ex = Executors.newSingleThreadExecutor();
+
+               Future<Integer> ft  =  ex.submit(new Callable<Integer>() {
+                    @Override
+                    public Integer call() throws Exception {
+                        return creditApi(userId,winningAmtStr,token);
+                    }
+                });
+
+
+                try {
+                    int resp =  ft.get();
+                    Toast.makeText(getApplicationContext(),"Amount Updated",Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
+                    startActivity(intent);
+
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }
+        });
+
 
     }//
 
@@ -100,7 +157,32 @@ public class GameActivity extends AppCompatActivity {
          if(bomArray.contains(index)){
             //game over -- bomb found
             imageButton[index].setBackground(getDrawable(R.drawable.boom));
-        }else {
+
+
+             ExecutorService ex = Executors.newSingleThreadExecutor();
+
+             Future<Integer> ft  =  ex.submit(new Callable<Integer>() {
+                 @Override
+                 public Integer call() throws Exception {
+
+                     return creditApi(userId,betAmt*-1+"",token);
+                 }
+             });
+
+             try {
+                 ft.get();
+                 Toast.makeText(getApplicationContext(),"Oops! Plz Try Again!!!",Toast.LENGTH_LONG).show();
+
+                 Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
+                 startActivity(intent);
+
+             } catch (ExecutionException e) {
+                 throw new RuntimeException(e);
+             } catch (InterruptedException e) {
+                 throw new RuntimeException(e);
+             }
+
+         }else {
 
              if(imageButton[index].getBackground().toString().contains("RippleDrawable")) {
                  winningAmt = winningAmt + betAmt;
@@ -110,4 +192,38 @@ public class GameActivity extends AppCompatActivity {
 
         }
     }
+
+    private Integer creditApi(String userId,String winningAmtStr,String token){
+        apiUrl = apiUrl + userId;
+
+        try {
+            URL url = new URL(apiUrl);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type","application/json");
+            connection.setRequestProperty("Accept","application/json");
+            connection.setRequestProperty("Authorization",token);
+
+            Map<String,Integer> map = new HashMap<>();
+            map.put("credit",Integer.parseInt(winningAmtStr));
+
+            Gson gson = new Gson();
+            String jsonString  = gson.toJson(map);
+
+            OutputStream out = connection.getOutputStream();
+            out.write(jsonString.getBytes());
+
+            int resp = connection.getResponseCode();
+
+            Log.i("CreditApi ",resp+"");
+
+            return resp;
+        }catch (Exception e){
+            Log.i("error",e.getMessage());
+        }
+        return -1;
+    }
+
 }
