@@ -39,5 +39,13 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        btnLeaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),LeaderboardActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
